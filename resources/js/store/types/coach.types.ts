@@ -1,0 +1,1 @@
+export const GET_COACH_PROFILE = "GET_COACH_PROFILE"
