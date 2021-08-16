@@ -1,0 +1,43 @@
+@import '../fonts/stylesheet.css';
+
+body {
+  font-family: "Proxima Nova", sans-serif !important;
+  font-weight: normal;
+  color: white;
+
+  &.tpl {
+    height: 5000px;
+    position: relative;
+    opacity: .6;
+    z-index: -20;
+  }
+}
+
+.react-tel-input .form-control {
+  width: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: transparent;
+  height: 49px;
+  padding-left: 70px;
+}
+
+.react-tel-input .selected-flag {
+  padding: 0;
+  margin: 0 auto;
+}
+.react-tel-input .flag-dropdown  {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  width: 60px;
+}
+
+.react-tel-input .selected-flag:hover, .react-tel-input .selected-flag:focus ,.react-tel-input .flag-dropdown.open  ,.react-tel-input .flag-dropdown.open .selected-flag {
+  background: transparent;
+}
+
+.chakra-checkbox {
+  padding-left: 0!important;
+}
+.country-list .country .country-name {
+  color: black
+}
