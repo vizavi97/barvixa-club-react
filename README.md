@@ -1,1 +1,0 @@
-# barvixa-club-react
