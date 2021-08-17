@@ -19,9 +19,6 @@ export const AuthLayout: React.FC<AuthLayoutInterface> = ({children}) => {
                     justifyContent='center'
                     alignItems='center'
                   >
-                    <Flex justifyContent={"center"}>
-                        <Image src={logo} w='140px' mb={4}/>
-                    </Flex>
                     {children}
                 </Flex>
             </Block>

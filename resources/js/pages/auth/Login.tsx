@@ -118,7 +118,6 @@ export const Login: React.FC = () => {
 
                 <Box mt={4}>
                     <Flex justifyContent={"space-between"} pt={4}>
-                        <Link as={RouterLink} to='/restore-password' colorScheme={"gray"}>Забыли пароль?</Link>
                         <Link as={RouterLink} to='/register'  colorScheme={"gray"}>Регистрация</Link>
                     </Flex>
                 </Box>

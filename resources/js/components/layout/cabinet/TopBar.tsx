@@ -36,7 +36,6 @@ const TopBar: React.FC<TopBarInterface> = ({history}) => {
     const {isOpen, onOpen, onClose} = useDisclosure()
     history.listen(() => onClose());
     const {colorMode, toggleColorMode} = useColorMode();
-    const {coach} = useSelector((state: RootStateOrAny) => state)
     const dispatch = useDispatch();
 
     return (
@@ -85,10 +84,6 @@ const TopBar: React.FC<TopBarInterface> = ({history}) => {
                                             <Avatar h={{base: '48px', md: "42px"}} w={{base: '48px', md: "42px"}}
                                                     mr={{base: "0", md: '1.125rem'}} name="Dan Abrahmov"
                                                     src="https://bit.ly/dan-abramov"/>
-                                            <Text d={{
-                                                base: 'none',
-                                                md: 'block'
-                                            }}>{coach.coach ? coach.coach.name + " " + coach.coach.name : null}</Text>
                                         </Flex>
                                     </MenuButton>
                                     <MenuList right={0}>

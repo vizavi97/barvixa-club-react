@@ -1,4 +1,0 @@
-export const CREATE_PLAYER = "CREATE_PLAYER"
-export const GET_PLAYERS = "GET_PLAYERS"
-export const DELETE_PLAYER = "DELETE_PLAYER"
-export const LOADING_PLAYERS = "LOADING_PLAYERS"

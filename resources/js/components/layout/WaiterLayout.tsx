@@ -1,21 +1,13 @@
 import {Box, Flex} from '@chakra-ui/react';
 import React, {useEffect, useState} from 'react'
-import {Block} from '../../../config/ui/Block';
-import {SideBar} from './SideBar';
-import TopBar from './TopBar';
 import {RootStateOrAny, useDispatch, useSelector} from "react-redux";
-import {getPlayers} from "../../../store/actions/player.action";
-import {getTeams} from "../../../store/actions/team.action";
+import {Block} from "../../config/ui/Block";
+import {SideBar} from "./cabinet/SideBar";
+import TopBar from "./cabinet/TopBar";
 
-export const CoachLayout: React.FC = ({children}) => {
+export const WaiterLayout: React.FC = ({children}) => {
     const {coach} = useSelector((state: RootStateOrAny) => state)
     const dispatch = useDispatch();
-    useEffect(() => {
-        if (coach.coach) {
-            dispatch(getPlayers(coach.coach.id));
-            dispatch(getTeams(coach.coach.id));
-        }
-    }, [coach.coach])
     return (
         <Flex>
             <Flex

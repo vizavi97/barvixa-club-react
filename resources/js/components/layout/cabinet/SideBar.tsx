@@ -9,7 +9,7 @@ import {logOutUser} from "../../../store/actions/user.action";
 export const SideBar: React.FC = () => {
     const {colorMode} = useColorMode();
     const dispatch = useDispatch()
-    const iconColor = colorMode === 'light' ? "#1C273C" : "#fff"
+    const iconColor = colorMode === 'light' ? "#B47425C6" : "#fff"
 
     const logOutHandler = () => dispatch(logOutUser())
 
@@ -25,11 +25,11 @@ export const SideBar: React.FC = () => {
                           px={'1.25rem'}
                           d='block'
                           _hover={{
-                              color: '#36AB7E'
+                              color: '#B47425C6'
                           }}
                           _focus={{}}
                     >
-                        <Image src={"https://www.uzbekistan.basketball/themes/basketball/assets/images/backup_of_ubf_logo_curves_v13-2.png"} h={"80px"}/>
+                      <Text>BARVIXA</Text>
                     </Link>
                 </Block>
                 <RouterLinks/>
@@ -43,8 +43,8 @@ export const SideBar: React.FC = () => {
                         width={"100%"}
                         borderRadius={0}
                         _hover={{
-                            color: '#36AB7E',
-                            "& path": {fill: '#36AB7E!important'}
+                            color: '#B47425C6',
+                            "& path": {fill: '#B47425C6!important'}
                         }}
                         _focus={{}}
                         onClick={logOutHandler}

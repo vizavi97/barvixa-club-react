@@ -20,9 +20,6 @@ export const validateRegister = (state: RegisterFormInterface, activeTab:string)
     if(state.password_confirmation !== state.password) {
         return 'Пароли не совпадают'
     }
-    if (!state.privacy) {
-        return 'Пожалуйста ознакомтесь с политикой сайта'
-    }
     if (state.password.length < 7) {
         return "Пароль должен быть длинее чем 7 символов"
     }

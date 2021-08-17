@@ -17,7 +17,7 @@ export const SideLink: React.FC<LinkInterface> = ({
     onClick
                                               }) => {
     const {colorMode} = useColorMode();
-    const iconColor = colorMode === 'light' ? "#1C273C" : "#fff"
+    const iconColor = colorMode === 'light' ? "#B47425C6" : "#fff"
     return (
         <Link as={RouterLink} to={path}
               fontSize='1rem'
@@ -26,12 +26,12 @@ export const SideLink: React.FC<LinkInterface> = ({
               alignItems='center'
               py='.875rem'
               _hover={{
-                  color: '#dc1f23',
-                  "& path": {fill: '#dc1f23!important'}
+                  color: '#B47425C6',
+                  "& path": {fill: '#B47425C6!important'}
               }}
               sx={{
-                  color: history_path === path ? "#dc1f23" : iconColor,
-                  "& path": {fill: history_path === path ? "#dc1f23" : iconColor}
+                  color: history_path === path ? "#B47425C6" : iconColor,
+                  "& path": {fill: history_path === path ? "#B47425C6" : iconColor}
               }}
               _focus={{}}
               onClick={onClick}
