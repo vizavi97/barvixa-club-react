@@ -25,7 +25,7 @@ import {Block} from "../../../config/ui/Block";
 import {RouterLinks} from "./RouterLinks";
 import {withRouter} from "react-router-dom";
 import logo from "../../../assets/images/logo.png";
-import {RootStateOrAny, useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import {logOutUser} from "../../../store/actions/user.action";
 
 interface TopBarInterface {
@@ -66,10 +66,10 @@ const TopBar: React.FC<TopBarInterface> = ({history}) => {
                     </Flex>
                     {/*end*/}
                     <Flex alignItems='center' pl={4}>
-                        <Switch colorScheme={'teal'} onChange={() => toggleColorMode()} size="lg"/>
-                        <Box px={4}>
-                            {colorMode === 'dark' ? <MoonIcon color='#fff'/> : <SunIcon color='#6a7187'/>}
-                        </Box>
+                        {/*<Switch colorScheme={'teal'} onChange={() => toggleColorMode()} size="lg"/>*/}
+                        {/*<Box px={4}>*/}
+                        {/*    {colorMode === 'dark' ? <MoonIcon color='#fff'/> : <SunIcon color='#6a7187'/>}*/}
+                        {/*</Box>*/}
                         <Menu placement={"bottom-start"}>
                             {({isOpen}) => (
                                 <>
