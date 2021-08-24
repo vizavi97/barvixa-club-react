@@ -66,22 +66,22 @@ export const Main: React.FC = () => {
     request: thisState.request.filter((filterItem) => filterItem.id !== id)
   }))
   const incrementFoodCountFromRequestHandler = (id: number) => {
-    let keyFromArr = 1;
-    state.request.forEach((item: RequestFoodInterface, key: number) => item.id === id ? keyFromArr = key : 1)
+    let keyFromArr = 0;
+    state.request.forEach((item: RequestFoodInterface, key: number) => item.id === id ? keyFromArr = key : 0)
     setState((state: MainInterface) => ({
       ...state,
-      [state.request[keyFromArr].count]: ++state.request[keyFromArr].count
+      [state.request[keyFromArr].count]: state.request[keyFromArr].count < 10 ? ++state.request[keyFromArr].count : 10
     }))
   }
   const decrementFoodCountFromRequestHandler = (id: number) => {
-    let keyFromArr = 1;
-    if (state.request[keyFromArr].count > 1) {
-      state.request.forEach((item: RequestFoodInterface, key: number) => item.id === id ? keyFromArr = key : 1)
-      setState((state: MainInterface) => ({
+    let keyFromArr = 0;
+    state.request.forEach((item: RequestFoodInterface, key: number) => item.id === id ? keyFromArr = key : 0)
+    setState((state: MainInterface) =>
+      ({
         ...state,
-        [state.request[keyFromArr].count]: --state.request[keyFromArr].count
-      }))
-    }
+        [state.request[keyFromArr].count]: state.request[keyFromArr].count > 1 ? --state.request[keyFromArr].count : 1
+      })
+    )
   }
   // @ts-ignore
   const result = useMemo(() => state.request.length ? state.request.reduce(

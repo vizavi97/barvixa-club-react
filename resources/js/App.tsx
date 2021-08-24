@@ -44,16 +44,25 @@ function App() {
       </BrowserRouter>
     )
   }
-  return (
+/*  return (
     <BrowserRouter>
       <AuthLayout>
         <Switch>
           <Route exact path='/register' component={Register}/>
-          <Route exact path='/*' component={Login}/>
+          <Route exact path='/!*' component={Login}/>
         </Switch>
       </AuthLayout>
     </BrowserRouter>
-  );
+  );*/
+  return (
+    <BrowserRouter>
+      <WaiterLayout>
+        <Switch>
+          <Route exact path='/' component={Main}/>
+        </Switch>
+      </WaiterLayout>
+    </BrowserRouter>
+  )
 }
 
 export default App;

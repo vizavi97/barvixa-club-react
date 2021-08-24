@@ -1,3 +1,4 @@
+import React, {ChangeEvent, FormEvent, useState} from 'react'
 import {
     Box,
     Text,
@@ -9,7 +10,6 @@ import {
 } from '@chakra-ui/react';
 import {Link as RouterLink} from 'react-router-dom'
 import 'react-phone-input-2/lib/style.css'
-import React, {ChangeEvent, FormEvent, useState} from 'react'
 import {useDispatch} from "react-redux";
 import {login} from "../../store/actions/user.action";
 import {validateLogin} from "../../tools/auth/login.validate";
