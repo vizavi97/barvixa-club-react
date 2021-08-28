@@ -6,10 +6,11 @@ import {Box, Button, Flex, Grid, GridItem, Image, Link, Text} from "@chakra-ui/r
 import {Block} from "../../../config/ui/Block";
 
 interface CreateRequestInterface {
-  isCreate: boolean
+  isCreate: boolean,
+  changeCreateState: () => void;
 }
 
-export const CreateRequest: React.FC<CreateRequestInterface> = ({isCreate}) => {
+export const CreateRequest: React.FC<CreateRequestInterface> = ({isCreate,changeCreateState}) => {
   const [info, setInfo] = useState<any>(null)
   const [state, setState] = useState<MainInterface>({
     hallId: null,
@@ -106,8 +107,17 @@ export const CreateRequest: React.FC<CreateRequestInterface> = ({isCreate}) => {
     }))
   }
   const submitHandler = (): void => {
-    axios.post(`${BACKEND_API_URL}request/create`, state)
-      .then(resp => console.log('REQUEST RESPONSE:', {...state, amount: result}))
+    axios.post(`${BACKEND_API_URL}request/create`, {
+      data: state.request,
+      place_id: state.placeId,
+      hall_id: state.hallId,
+      user_token: localStorage.getItem('token')
+    })
+      .then(() => {
+        cancelHandler()
+        changeCreateState();
+      })
+      .catch(err => console.log('request error :', err))
   }
   return (
     <Flex>
