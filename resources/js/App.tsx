@@ -44,6 +44,18 @@ function App() {
       </BrowserRouter>
     )
   }
+  if (user && user.is_activated && user.role.code === "accountant") {
+    return (
+      <BrowserRouter>
+        <WaiterLayout>
+          Accountant
+          {/*<Switch>*/}
+          {/*  <Route exact path='/' component={Main}/>*/}
+          {/*</Switch>*/}
+        </WaiterLayout>
+      </BrowserRouter>
+    )
+  }
   return (
     <BrowserRouter>
       <AuthLayout>

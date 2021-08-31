@@ -25,7 +25,7 @@ export const register = (params: RegisterParamsInterface) => async (dispatch: Di
           user: resp.data.user,
           token: resp.data.token,
           loader: false,
-          message: 'Ваш вккаунт создан!',
+          message: 'Данные отправлены на сервер успешно..., Ждите подтверждения!',
           error: false
         }
       })
