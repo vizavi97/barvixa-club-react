@@ -48,6 +48,7 @@ export const ListRequest: React.FC<ListRequestInterface> = ({isCreate}) => {
           amount={item.amount}
           products={item.products}
           status={item.status.title as string}
+          created_at={item.created_at}
         />)}
     </Block>
   )

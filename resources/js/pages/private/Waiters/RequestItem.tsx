@@ -22,23 +22,24 @@ export interface RequestItemInterface {
   amount: number
   products: any[] | []
   status: any | string
+  created_at: string | Date
 }
 
 export const RequestItem: React.FC<RequestItemInterface> = ({
                                                               id,
                                                               amount,
                                                               products,
-                                                              status
+                                                              status,
+                                                              created_at
                                                             }) => {
 
-  console.log("PRODUCTS", products)
   const [isOpen, setIsOpen] = useState<boolean>(id === 8)
   return (
     <Block p={6} mb={6} borderRadius={2}
            sx={{
              overflow: "hidden",
              position: 'relative',
-             maxHeight: isOpen ? "100%" : "100px",
+             paddingBottom: "0.5rem"
            }}
     >
       <Flex
@@ -54,7 +55,16 @@ export const RequestItem: React.FC<RequestItemInterface> = ({
           <Text fontSize="1.25rem" color="twitter">
             Цена заказа: <Text as={'span'} color={"green"} fontWeight={"600"}> {amount}</Text>
           </Text>
+          <Text fontSize="1.25rem" color="twitter">
+            Время создания заказа: <Text as={'span'} color={"orange"} fontWeight={"600"}> {created_at}</Text>
+          </Text>
+          <Text fontWeight={"600"}>Статус:
+            <Badge ml={4} fontSize="0.8em" colorScheme="green">
+              {status}
+            </Badge>
+          </Text>
         </Box>
+
         <Button
           variant={"ghost"}
           colorScheme={"teal"}
@@ -87,7 +97,8 @@ export const RequestItem: React.FC<RequestItemInterface> = ({
         zIndex: 1,
         marginTop: '1rem'
       }}>
-        {products.length > 0 && <Table variant="striped" colorScheme="telegram.300">
+        {products.length > 0 &&
+        <Table variant="striped" colorScheme="telegram.300">
           <Thead>
             <Tr>
               <Th>Картинка</Th>
@@ -121,14 +132,10 @@ export const RequestItem: React.FC<RequestItemInterface> = ({
             )}
 
           </Tbody>
-        </Table>}
+        </Table>
+        }
         <Divider/>
-        <Flex justifyContent={"space-between"} py={2}>
-          <Text fontWeight={"600"}>status:
-            <Badge ml={4} fontSize="0.8em" colorScheme="green">
-              {status}
-            </Badge>
-          </Text>
+        <Flex justifyContent={"flex-end"} py={2}>
           <Text fontSize={"1.25rem"} fontWeight={"600"}>Итого: <Text as={'span'} color={"green"}
                                                                      fontWeight={"600"}>{amount}</Text></Text>
         </Flex>
