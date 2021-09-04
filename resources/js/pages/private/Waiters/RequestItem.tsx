@@ -33,7 +33,7 @@ export const RequestItem: React.FC<RequestItemInterface> = ({
                                                               created_at
                                                             }) => {
 
-  const [isOpen, setIsOpen] = useState<boolean>(id === 8)
+  const [isOpen, setIsOpen] = useState<boolean>(false)
   return (
     <Block p={6} mb={6} borderRadius={2}
            sx={{

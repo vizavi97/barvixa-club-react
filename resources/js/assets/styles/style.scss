@@ -68,3 +68,19 @@ body {
   border-color: inherit;
   background: inherit;
 }
+.draggable-table {
+    position: relative;
+    z-index: 1;
+}
+.draggable-table:after {
+    position: absolute;
+    z-index: 2;
+    content: '';
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+}
+.drag:after {
+    background: #0d6aad20;
+}

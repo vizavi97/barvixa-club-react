@@ -9,6 +9,7 @@ import {useToast} from "@chakra-ui/react";
 import {AuthLayout} from "./components/layout/auth/AuthLayout";
 import {Register} from "./pages/auth/Register";
 import {WaiterLayout} from "./components/layout/WaiterLayout";
+import {Accountant} from "./pages/private/Accountant/Accountant";
 
 
 function App() {
@@ -48,10 +49,9 @@ function App() {
     return (
       <BrowserRouter>
         <WaiterLayout>
-          Accountant
-          {/*<Switch>*/}
-          {/*  <Route exact path='/' component={Main}/>*/}
-          {/*</Switch>*/}
+          <Switch>
+            <Route exact path='/' component={Accountant}/>
+          </Switch>
         </WaiterLayout>
       </BrowserRouter>
     )
