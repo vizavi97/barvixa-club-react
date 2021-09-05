@@ -12,14 +12,15 @@ interface AccountantInterface {
 
 export const Accountant: React.FC<AccountantInterface> = () => {
   const dispatch = useDispatch()
-
   useEffect(() => {
     dispatch(getConsumables())
   },[])
 
+
+
   return (
     <Block>
-      <Block>
+      <Block p={2} mb={4}>
         <AccountantFilter/>
       </Block>
       <Flex>

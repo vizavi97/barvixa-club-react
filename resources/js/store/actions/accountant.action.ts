@@ -1,12 +1,16 @@
 import {Dispatch} from "react";
 import {DispatchEvent} from "../redux";
-import {GET_CONSUMABLES, PUT_CONSUMABLES_TO_CHOSE} from "../types/accountant.types";
-import {AccountantDispatchInterface, chooseConsumablesDispatchInterface} from "../interfaces/accountant";
+import {CHANGE_FILTERED_STRING, GET_CONSUMABLES, PUT_CONSUMABLES_TO_CHOSE} from "../types/accountant.types";
+import {
+  AccountantDispatchInterface,
+  ChangeFilteredStringDispatchInterface,
+  ChooseConsumablesDispatchInterface
+} from "../interfaces/accountant";
 import axios from "axios";
 import {BACKEND_ROUTES} from "../../config/app.config";
 
 export const getConsumables = () =>
-  (dispatch: Dispatch<DispatchEvent<AccountantDispatchInterface>>) => {
+  async (dispatch: Dispatch<DispatchEvent<AccountantDispatchInterface>>) => {
     dispatch({
       type: GET_CONSUMABLES,
       payload: {
@@ -14,7 +18,7 @@ export const getConsumables = () =>
         isLoading: true
       }
     })
-    axios.get(BACKEND_ROUTES.CONSUMABLES)
+    await axios.get(BACKEND_ROUTES.CONSUMABLES)
       .then(
         resp => dispatch({
           type: GET_CONSUMABLES,
@@ -33,8 +37,21 @@ export const getConsumables = () =>
           }
         }))
   }
+
+
+export const setFilteredString = (str: string) =>
+  (dispatch: Dispatch<DispatchEvent<ChangeFilteredStringDispatchInterface>>) => {
+    dispatch({
+      type: CHANGE_FILTERED_STRING,
+      payload: {
+        filteredString: str
+      }
+    })
+  }
+
+
 export const putToChoseConsumables = (id: number | string) =>
-  (dispatch: Dispatch<DispatchEvent<chooseConsumablesDispatchInterface>>) => {
+  (dispatch: Dispatch<DispatchEvent<ChooseConsumablesDispatchInterface>>) => {
     dispatch({
       type: PUT_CONSUMABLES_TO_CHOSE,
       payload: {

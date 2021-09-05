@@ -2,6 +2,7 @@ export interface AccountantStateInterface {
   consumables: [] | ConsumablesInterface[]
   isLoading: boolean
   isChoseConsumables: [] | ConsumablesInterface[]
+  filteredString: string
 }
 
 export interface ConsumablesInterface {
@@ -17,6 +18,10 @@ export interface AccountantDispatchInterface {
   isLoading: boolean
 }
 
-export interface chooseConsumablesDispatchInterface {
+export interface ChooseConsumablesDispatchInterface {
   isChoseConsumables: ConsumablesInterface | number | string
+}
+
+export interface ChangeFilteredStringDispatchInterface {
+  filteredString: string
 }

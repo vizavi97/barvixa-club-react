@@ -4,12 +4,8 @@ import {RootStateOrAny, useDispatch, useSelector} from "react-redux";
 import {AccountantStateInterface} from "../../store/interfaces/accountant";
 import {putToChoseConsumables} from "../../store/actions/accountant.action";
 import {CalculationConsumableCell} from "./СalculationConsumableCell";
-import {mode} from "@chakra-ui/theme-tools";
 
-interface ListOfConsumablesInterface {
-}
-
-export const ListOfConsumables: React.FC<ListOfConsumablesInterface> = () => {
+export const ListOfConsumables: React.FC= () => {
   const dispatch = useDispatch()
   const toast = useToast();
   const {isChoseConsumables} = useSelector((state: RootStateOrAny) => state.accountant as AccountantStateInterface)
@@ -35,7 +31,7 @@ export const ListOfConsumables: React.FC<ListOfConsumablesInterface> = () => {
   const DropHandler = useCallback((event: DragEvent<HTMLDivElement>) => {
     const id = event.dataTransfer.getData('id')
     tableRef.current?.classList.remove('draggable');
-    if(isChoseConsumables.some((item) => item.id === Number(id))) {
+    if(isChoseConsumables.some((item) => Number(item.id) === Number(id))) {
       return  toast({
         title: "Предупреждение",
         position: "top",

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useMemo} from 'react'
 import {Table, Tbody, Th, Thead, Tr} from "@chakra-ui/react";
 import {ConsumableCell} from "./ConsumableCell";
 import {TableLoader} from "./TableLoader";
@@ -8,7 +8,13 @@ import {Block} from "../../config/ui/Block";
 
 
 export const ConsumablesTable: React.FC = () => {
-  const {consumables, isLoading} = useSelector((state: RootStateOrAny) => state.accountant as AccountantStateInterface)
+  const {
+    consumables,
+    isLoading,
+    filteredString
+  } = useSelector((state: RootStateOrAny) => state.accountant as AccountantStateInterface)
+
+  const filteredArr = useMemo(() => consumables.filter(item => Object.values(item).some(subItem => subItem.toString().toLowerCase().trim().includes(filteredString))), [filteredString]);
   return (
     <Block p={4}>
       <Table variant="simple"
@@ -33,7 +39,7 @@ export const ConsumablesTable: React.FC = () => {
           width: "100%"
         }}>
           {isLoading && <TableLoader length={20}/>}
-          {consumables.length > 0 && !isLoading && consumables.map((item, key) =>
+          {consumables.length > 0 && !isLoading && filteredArr.map((item, key) =>
             <ConsumableCell
               id={item.id}
               name={item.title}
