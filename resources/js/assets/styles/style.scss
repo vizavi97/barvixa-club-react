@@ -1,86 +1,139 @@
 @import '../fonts/stylesheet.css';
 
 body {
-  font-family: "Proxima Nova", sans-serif !important;
-  font-weight: normal;
-  color: white;
+    font-family: "Proxima Nova", sans-serif !important;
+    font-weight: normal;
+    color: white;
 
-  &.tpl {
-    height: 5000px;
-    position: relative;
-    opacity: .6;
-    z-index: -20;
-  }
+    &.tpl {
+        height: 5000px;
+        position: relative;
+        opacity: .6;
+        z-index: -20;
+    }
 }
 
 .react-tel-input .form-control {
-  width: 100%;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  background: transparent;
-  height: 49px;
-  padding-left: 70px;
+    width: 100%;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: transparent;
+    height: 49px;
+    padding-left: 70px;
 }
 
 .react-tel-input .selected-flag {
-  padding: 0;
-  margin: 0 auto;
-}
-.react-tel-input .flag-dropdown  {
-  background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  width: 60px;
+    padding: 0;
+    margin: 0 auto;
 }
 
-.react-tel-input .selected-flag:hover, .react-tel-input .selected-flag:focus ,.react-tel-input .flag-dropdown.open  ,.react-tel-input .flag-dropdown.open .selected-flag {
-  background: transparent;
+.react-tel-input .flag-dropdown {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    width: 60px;
+}
+
+.react-tel-input .selected-flag:hover, .react-tel-input .selected-flag:focus, .react-tel-input .flag-dropdown.open, .react-tel-input .flag-dropdown.open .selected-flag {
+    background: transparent;
 }
 
 .chakra-checkbox {
-  padding-left: 0!important;
+    padding-left: 0 !important;
 }
+
 .country-list .country .country-name {
-  color: black
+    color: black
 }
 
 .react-datepicker-wrapper {
-  width: 100%;
+    width: 100%;
 }
+
 .react-datepicker__input-container > input {
-  width: 100%;
-  min-width: 0px;
-  outline: 2px solid transparent;
-  outline-offset: 2px;
-  position: relative;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  -ms-appearance: none;
-  appearance: none;
-  transition-property: var(--chakra-transition-property-common);
-  transition-duration: var(--chakra-transition-duration-normal);
-  font-size: var(--chakra-fontSizes-md);
-  -webkit-padding-start: var(--chakra-space-4);
-  padding-inline-start: var(--chakra-space-4);
-  -webkit-padding-end: var(--chakra-space-4);
-  padding-inline-end: var(--chakra-space-4);
-  height: 49px;
-  border-radius: var(--chakra-radii-md);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-color: inherit;
-  background: inherit;
-}
-.draggable-table {
+    width: 100%;
+    min-width: 0px;
+    outline: 2px solid transparent;
+    outline-offset: 2px;
     position: relative;
-    z-index: 1;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    appearance: none;
+    transition-property: var(--chakra-transition-property-common);
+    transition-duration: var(--chakra-transition-duration-normal);
+    font-size: var(--chakra-fontSizes-md);
+    -webkit-padding-start: var(--chakra-space-4);
+    padding-inline-start: var(--chakra-space-4);
+    -webkit-padding-end: var(--chakra-space-4);
+    padding-inline-end: var(--chakra-space-4);
+    height: 49px;
+    border-radius: var(--chakra-radii-md);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-color: inherit;
+    background: inherit;
 }
-.draggable-table:after {
+
+.draggable {
+    position: relative;
+}
+
+.inner, .inner-text {
+    display: none;
+}
+
+.draggable > * {
+    position: relative;
+    z-index: -1;
+}
+
+.draggable > .inner:before {
+    display: block;
     position: absolute;
-    z-index: 2;
     content: '';
     left: 0;
     top: 0;
-    height: 100%;
     width: 100%;
-}
-.drag:after {
+    height: 100%;
+    z-index: -1;
     background: #0d6aad20;
+}
+
+.draggable > .inner-text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    color: #0d6aad;
+}
+
+.draggable > .inner {
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    background: linear-gradient(90deg, black 50%, transparent 50%),
+    linear-gradient(90deg, black 50%, transparent 50%),
+    linear-gradient(0deg, black 50%, transparent 50%),
+    linear-gradient(0deg, black 50%, transparent 50%);
+    background-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
+    background-size: 16px 4px, 16px 4px, 4px 16px, 4px 16px;
+    background-position: 0% 0%, 100% 100%, 0% 100%, 100% 0px;
+    border-radius: 5px;
+    padding: 10px;
+    animation: dash 5s linear infinite;
+}
+
+
+@keyframes dash {
+    to {
+        background-position: 100% 0%, 0% 100%, 0% 0%, 100% 100%;
+    }
 }

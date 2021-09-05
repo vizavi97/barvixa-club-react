@@ -5,6 +5,7 @@ import {Block} from "../../../config/ui/Block";
 import {ListOfConsumables} from "../../../components/Accountant/ListOfConsumables";
 import {useDispatch} from "react-redux";
 import {getConsumables} from "../../../store/actions/accountant.action";
+import {AccountantFilter} from "../../../components/Accountant/AccountantFilter";
 
 interface AccountantInterface {
 }
@@ -18,6 +19,9 @@ export const Accountant: React.FC<AccountantInterface> = () => {
 
   return (
     <Block>
+      <Block>
+        <AccountantFilter/>
+      </Block>
       <Flex>
         <Flex>
           <ConsumablesTable/>
