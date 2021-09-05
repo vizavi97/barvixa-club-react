@@ -31,9 +31,9 @@ function App() {
       })
     }
   }, [renderCounter, toast, error, message]);
-  if (loader) {
-    return (<PreLoader/>)
-  }
+
+  if (loader) return <PreLoader/>
+
   if (user && user.is_activated && user.role.code === "waiter") {
     return (
       <BrowserRouter>

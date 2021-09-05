@@ -11,7 +11,7 @@ export const WaiterLayout: React.FC = ({children}) => {
             overflowX='hidden'
       >
         {/*<TopBar/>*/}
-        <Flex flexDirection={'column'} px={'1.25rem'} py={'1.5rem'}>
+        <Flex flexDirection={'column'} px={'1.25rem'} py={'0.75rem'}>
           {children}
         </Flex>
       </Flex>

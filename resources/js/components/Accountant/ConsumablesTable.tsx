@@ -14,7 +14,8 @@ export const ConsumablesTable: React.FC = () => {
     filteredString
   } = useSelector((state: RootStateOrAny) => state.accountant as AccountantStateInterface)
 
-  const filteredArr = useMemo(() => consumables.filter(item => Object.values(item).some(subItem => subItem.toString().toLowerCase().trim().includes(filteredString))), [filteredString]);
+  const filteredArr = useMemo(() => consumables.filter(item => Object.values(item)
+    .some(subItem => subItem.toString().toLowerCase().trim().includes(filteredString))), [filteredString]);
   return (
     <Block p={4}>
       <Table variant="simple"
@@ -35,18 +36,27 @@ export const ConsumablesTable: React.FC = () => {
         <Tbody sx={{
           display: "block",
           overflow: "auto",
-          height: "calc(100vh - 120px)",
+          height: "calc(100vh - 160px)",
           width: "100%"
         }}>
-          {isLoading && <TableLoader length={20}/>}
-          {consumables.length > 0 && !isLoading && filteredArr.map((item, key) =>
-            <ConsumableCell
-              id={item.id}
-              name={item.title}
-              type={item.type}
-              cost={item.price}
-              group={item.group}
-              key={key}/>)}
+          {(!isLoading && filteredString.length)
+            ? filteredArr.map((item, key) =>
+              <ConsumableCell
+                id={item.id}
+                name={item.title}
+                type={item.type}
+                cost={item.price}
+                group={item.group}
+                key={key}/>)
+            : (!isLoading && !filteredString.length) ? consumables.map((item, key) =>
+              <ConsumableCell
+                id={item.id}
+                name={item.title}
+                type={item.type}
+                cost={item.price}
+                group={item.group}
+                key={key}/>) : <TableLoader length={20}/>}
+
         </Tbody>
       </Table>
     </Block>

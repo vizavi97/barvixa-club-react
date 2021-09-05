@@ -87,7 +87,7 @@ export const ListOfConsumables: React.FC= () => {
         <Tbody sx={{
           display: "block",
           overflow: "auto",
-          height: "calc(100vh - 120px)",
+          height: "calc(100vh - 160px)",
           width: "100%"
         }}>
           {isChoseConsumables.length > 0 && isChoseConsumables.map((item, key) =>
