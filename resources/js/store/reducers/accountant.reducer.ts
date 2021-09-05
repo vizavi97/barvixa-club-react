@@ -1,6 +1,11 @@
 import {DispatchEvent} from "../redux";
 import {AccountantStateInterface} from "../interfaces/accountant";
-import {CHANGE_FILTERED_STRING, GET_CONSUMABLES, PUT_CONSUMABLES_TO_CHOSE} from "../types/accountant.types";
+import {
+  CHANGE_FILTERED_STRING, DELETE_All_CONSUMABLES_TO_CHOSE,
+  DELETE_CONSUMABLES_TO_CHOSE,
+  GET_CONSUMABLES,
+  PUT_CONSUMABLES_TO_CHOSE
+} from "../types/accountant.types";
 
 const initialState = {
   consumables: [],
@@ -22,14 +27,31 @@ export const AccountantReducer = (state = initialState, action: DispatchEvent<an
     case PUT_CONSUMABLES_TO_CHOSE:
       return {
         ...state,
-        isChoseConsumables: !state.isChoseConsumables.some(item => item.id === payload.isChoseConsumables) ?
-          [...state.isChoseConsumables, state.consumables.filter(item => item.id === payload.isChoseConsumables)[0]] :
+        isChoseConsumables: !state.isChoseConsumables.some(item => Number(item.id) === payload.isChoseConsumables) ?
+          [...state.isChoseConsumables,
+            {
+              ...state.consumables.filter(item => item.id === payload.isChoseConsumables)[0],
+              count: 0,
+              cost: 0,
+              amount: 0
+            }
+          ] :
           state.isChoseConsumables
       }
     case CHANGE_FILTERED_STRING:
       return {
         ...state,
         filteredString: payload.filteredString
+      }
+    case DELETE_CONSUMABLES_TO_CHOSE:
+      return {
+        ...state,
+        isChoseConsumables: state.consumables.filter(item => Number(item.id) !== payload.isChoseConsumables)
+      }
+    case DELETE_All_CONSUMABLES_TO_CHOSE:
+      return {
+        ...state,
+        isChoseConsumables: payload.isChoseConsumables
       }
     default:
       return state

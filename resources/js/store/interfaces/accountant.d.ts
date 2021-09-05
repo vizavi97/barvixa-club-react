@@ -11,6 +11,9 @@ export interface ConsumablesInterface {
   type: string
   group: string
   price: string | number
+  count: number,
+  cost: number,
+  amount: number
 }
 
 export interface AccountantDispatchInterface {
@@ -19,7 +22,7 @@ export interface AccountantDispatchInterface {
 }
 
 export interface ChooseConsumablesDispatchInterface {
-  isChoseConsumables: ConsumablesInterface | number | string
+  isChoseConsumables: ConsumablesInterface | number | string | []
 }
 
 export interface ChangeFilteredStringDispatchInterface {

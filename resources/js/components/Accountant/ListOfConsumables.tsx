@@ -1,11 +1,11 @@
 import React, {DragEvent, useCallback, useRef} from 'react'
-import {Box, Table, Tbody, Th, Thead, Tr, Text, useToast} from "@chakra-ui/react";
+import {Box, Table, Tbody, Th, Thead, Tr, Text, useToast, Tfoot, Button, Td} from "@chakra-ui/react";
 import {RootStateOrAny, useDispatch, useSelector} from "react-redux";
 import {AccountantStateInterface} from "../../store/interfaces/accountant";
-import {putToChoseConsumables} from "../../store/actions/accountant.action";
+import {deleteAllChoseConsumables, putToChoseConsumables} from "../../store/actions/accountant.action";
 import {CalculationConsumableCell} from "./СalculationConsumableCell";
 
-export const ListOfConsumables: React.FC= () => {
+export const ListOfConsumables: React.FC = () => {
   const dispatch = useDispatch()
   const toast = useToast();
   const {isChoseConsumables} = useSelector((state: RootStateOrAny) => state.accountant as AccountantStateInterface)
@@ -31,8 +31,10 @@ export const ListOfConsumables: React.FC= () => {
   const DropHandler = useCallback((event: DragEvent<HTMLDivElement>) => {
     const id = event.dataTransfer.getData('id')
     tableRef.current?.classList.remove('draggable');
-    if(isChoseConsumables.some((item) => Number(item.id) === Number(id))) {
-      return  toast({
+    const same = isChoseConsumables.length ? isChoseConsumables.some((item) => item.id === Number(id)) : false
+    console.log(same)
+    if (same) {
+      return toast({
         title: "Предупреждение",
         position: "top",
         description: "Такой расходный материал уже имеется в  наличие",
@@ -41,22 +43,24 @@ export const ListOfConsumables: React.FC= () => {
         isClosable: true,
       })
     }
-    dispatch(putToChoseConsumables(id))
-  }, [])
+    return dispatch(putToChoseConsumables(id))
+  }, [isChoseConsumables])
   return (
     <Box
-         sx={{
-           position: "relative",
-           background: "#fff",
-           color: "#1c273c",
-           boxShadow: "0px 8px 25px #0508090F",
-           p: "1rem",
-           "& td,& th": {
-             paddingX: "0.325rem"
+      sx={{
+        w: "100%",
+        position: "relative",
+        background: "#fff",
+        color: "#1c273c",
+        boxShadow: "0px 8px 25px #0508090F",
+        p: "1rem",
+        "& td,& th": {
+          paddingX: "0.325rem"
 
-           }         }}
-         onDragEnter={event => DragEnterHandler(event)}
-         ref={tableRef}
+        }
+      }}
+      onDragEnter={event => DragEnterHandler(event)}
+      ref={tableRef}
     >
       <Box className={'inner'}
            onDragOver={event => DragOverHandler(event)}
@@ -77,7 +81,7 @@ export const ListOfConsumables: React.FC= () => {
         }}>
           <Tr>
             {/*<Th><Checkbox size="sm" colorScheme="green" defaultIsChecked/></Th>*/}
-            <Th width={"8rem"} >Наименование</Th>
+            <Th width={"8rem"}>Наименование</Th>
             <Th width={"4rem"}>Ед изм</Th>
             <Th width={"6rem"} isNumeric>Цена ед<br/> изм. </Th>
             <Th width={"6rem"} isNumeric>Кол-во</Th>
@@ -87,7 +91,7 @@ export const ListOfConsumables: React.FC= () => {
         <Tbody sx={{
           display: "block",
           overflow: "auto",
-          height: "calc(100vh - 160px)",
+          height: "calc(100vh - 240px)",
           width: "100%"
         }}>
           {isChoseConsumables.length > 0 && isChoseConsumables.map((item, key) =>
@@ -96,12 +100,33 @@ export const ListOfConsumables: React.FC= () => {
               id={item.id}
               name={item.title}
               type={item.type}
-              count={0}
-              cost={0}
-              amount={0}
+              count={item.count}
+              cost={item.cost}
+              amount={item.amount}
             />
           )}
         </Tbody>
+        {isChoseConsumables.length > 0 &&
+        <Tfoot sx={{
+          tableLayout: "fixed",
+          borderCollapse: "collapse",
+          display: "block"
+        }}>
+          <Tr>
+            <Td width={"6rem"} px={0}>
+              <Button colorScheme={"red"}
+                      type={"button"}
+                      onClick={() => dispatch(deleteAllChoseConsumables())}
+              >Очистить список</Button>
+            </Td>
+            <Td width={"6rem"} px={0}>
+              <Button colorScheme={"green"}
+                      type={"button"}>Внести</Button>
+            </Td>
+          </Tr>
+        </Tfoot>
+        }
+
       </Table>
     </Box>
   )

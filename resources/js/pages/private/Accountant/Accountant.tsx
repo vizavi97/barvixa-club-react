@@ -6,6 +6,7 @@ import {ListOfConsumables} from "../../../components/Accountant/ListOfConsumable
 import {useDispatch} from "react-redux";
 import {getConsumables} from "../../../store/actions/accountant.action";
 import {AccountantFilter} from "../../../components/Accountant/AccountantFilter";
+import {LeftOvers} from "../../../components/Accountant/LeftOvers";
 
 interface AccountantInterface {
 }
@@ -14,22 +15,23 @@ export const Accountant: React.FC<AccountantInterface> = () => {
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(getConsumables())
-  },[])
-
-
-
+  }, [])
   return (
     <Block>
       <Block p={2} mb={4}>
         <AccountantFilter/>
       </Block>
-      <Flex>
-        <Flex>
+      <Flex justifyContent={"center"}>
+        <Flex flex={1}>
           <ConsumablesTable/>
-          <Divider orientation="vertical" />
+          <Divider mx={1} orientation="vertical"/>
         </Flex>
-        <Flex ml={2}>
+        <Flex flex={1} ml={2}>
           <ListOfConsumables/>
+        </Flex>
+        <Flex flex={1} ml={2}>
+          <Divider mx={1} orientation="vertical"/>
+          <LeftOvers/>
         </Flex>
       </Flex>
     </Block>

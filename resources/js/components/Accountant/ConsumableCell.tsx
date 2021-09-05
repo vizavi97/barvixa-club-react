@@ -40,9 +40,12 @@ export const ConsumableCell: React.FC<ConsumableCellInterface> = ({
     >
       {/*<Td><Checkbox size="sm" colorScheme="green" defaultIsChecked/></Td>*/}
       <Td width={"8rem"}>{name}</Td>
-      <Td width={"3rem"}>{type}</Td>
+      <Td width={"4rem"}>{type}</Td>
       <Td width={"6rem"}>{group}</Td>
-      <Td width={"8rem"} isNumeric>{cost}</Td>
+      <Td width={"4rem"}
+          isNumeric
+          color={"red"}
+      >{cost}</Td>
     </Tr>
   )
 }

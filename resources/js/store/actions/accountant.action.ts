@@ -1,6 +1,11 @@
 import {Dispatch} from "react";
 import {DispatchEvent} from "../redux";
-import {CHANGE_FILTERED_STRING, GET_CONSUMABLES, PUT_CONSUMABLES_TO_CHOSE} from "../types/accountant.types";
+import {
+  CHANGE_FILTERED_STRING,
+  DELETE_All_CONSUMABLES_TO_CHOSE, DELETE_CONSUMABLES_TO_CHOSE,
+  GET_CONSUMABLES,
+  PUT_CONSUMABLES_TO_CHOSE
+} from "../types/accountant.types";
 import {
   AccountantDispatchInterface,
   ChangeFilteredStringDispatchInterface,
@@ -56,6 +61,27 @@ export const putToChoseConsumables = (id: number | string) =>
       type: PUT_CONSUMABLES_TO_CHOSE,
       payload: {
         isChoseConsumables: Number(id)
+      }
+    })
+  }
+
+export const removeChoseConsumables = (id: number | string) =>
+  (dispatch: Dispatch<DispatchEvent<ChooseConsumablesDispatchInterface>>) => {
+    dispatch({
+      type: DELETE_CONSUMABLES_TO_CHOSE,
+      payload: {
+        isChoseConsumables: Number(id)
+      }
+    })
+  }
+
+
+export const deleteAllChoseConsumables = () =>
+  (dispatch: Dispatch<DispatchEvent<ChooseConsumablesDispatchInterface>>) => {
+    dispatch({
+      type: DELETE_All_CONSUMABLES_TO_CHOSE,
+      payload: {
+        isChoseConsumables: []
       }
     })
   }
