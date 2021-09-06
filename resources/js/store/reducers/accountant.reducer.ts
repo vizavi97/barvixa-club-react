@@ -1,6 +1,7 @@
 import {DispatchEvent} from "../redux";
 import {AccountantStateInterface} from "../interfaces/accountant";
 import {
+  CHANGE_CONSUMABLE_IN_ARRAY,
   CHANGE_FILTERED_STRING, DELETE_All_CONSUMABLES_TO_CHOSE,
   DELETE_CONSUMABLES_TO_CHOSE,
   GET_CONSUMABLES,
@@ -42,6 +43,14 @@ export const AccountantReducer = (state = initialState, action: DispatchEvent<an
       return {
         ...state,
         filteredString: payload.filteredString
+      }
+    case CHANGE_CONSUMABLE_IN_ARRAY:
+      return {
+        ...state,
+        isChoseConsumables: state.isChoseConsumables.map(item => item.id === payload.id ? ({
+          ...item,
+          [payload.name]: payload.value
+        }) : item)
       }
     case DELETE_CONSUMABLES_TO_CHOSE:
       return {

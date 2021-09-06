@@ -1,5 +1,7 @@
 import React, {ChangeEvent, useState} from 'react'
 import {Input, Td, Tr} from "@chakra-ui/react";
+import {useDispatch} from "react-redux";
+import {changeConsumableInArray} from "../../store/actions/accountant.action";
 
 interface CalculationConsumableCellInterface {
   id: number
@@ -24,18 +26,10 @@ export const CalculationConsumableCell: React.FC<CalculationConsumableCellInterf
                                                                                           cost,
                                                                                           amount
                                                                                         }) => {
-  const [formState, setFormState] = useState<formStateInterface>({
-    count,
-    cost,
-    amount
-  })
-
+  const dispatch = useDispatch()
   const changeInputHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    console.log(event.target.value)
-    setFormState(state => ({
-      ...state,
-      [event.target.name]: event.target.value
-    }))
+    const {name, value} = event.target
+    dispatch(changeConsumableInArray(id,name,+value))
   }
 
 
@@ -49,25 +43,28 @@ export const CalculationConsumableCell: React.FC<CalculationConsumableCellInterf
         <Td width={"6rem"}>
           <Input type={'number'}
                  name={'count'}
-                 value={formState.count}
+                 value={count}
                  onChange={changeInputHandler}
                  px={1}
+                 min={0}
           />
         </Td>
         <Td width={"6rem"}>
           <Input type={'number'}
                  name={'cost'}
-                 value={formState.count}
+                 value={cost}
                  onChange={changeInputHandler}
                  px={1}
+                 min={0}
           />
         </Td>
         <Td width={"6rem"}>
           <Input type={'number'}
-                 name={'number'}
-                 value={formState.count}
+                 name={'amount'}
+                 value={amount}
                  onChange={changeInputHandler}
                  px={1}
+                 min={0}
           />
         </Td>
       </Tr>

@@ -28,3 +28,9 @@ export interface ChooseConsumablesDispatchInterface {
 export interface ChangeFilteredStringDispatchInterface {
   filteredString: string
 }
+
+export interface ChangeConsumableInArrayDispatchInterface {
+  id: number | string,
+  name: string,
+  value: number
+}

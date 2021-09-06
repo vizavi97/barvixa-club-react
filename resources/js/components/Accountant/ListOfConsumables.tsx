@@ -45,6 +45,7 @@ export const ListOfConsumables: React.FC = () => {
     }
     return dispatch(putToChoseConsumables(id))
   }, [isChoseConsumables])
+
   return (
     <Box
       sx={{

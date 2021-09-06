@@ -1,13 +1,14 @@
 import {Dispatch} from "react";
 import {DispatchEvent} from "../redux";
 import {
+  CHANGE_CONSUMABLE_IN_ARRAY,
   CHANGE_FILTERED_STRING,
   DELETE_All_CONSUMABLES_TO_CHOSE, DELETE_CONSUMABLES_TO_CHOSE,
   GET_CONSUMABLES,
   PUT_CONSUMABLES_TO_CHOSE
 } from "../types/accountant.types";
 import {
-  AccountantDispatchInterface,
+  AccountantDispatchInterface, ChangeConsumableInArrayDispatchInterface,
   ChangeFilteredStringDispatchInterface,
   ChooseConsumablesDispatchInterface
 } from "../interfaces/accountant";
@@ -61,6 +62,18 @@ export const putToChoseConsumables = (id: number | string) =>
       type: PUT_CONSUMABLES_TO_CHOSE,
       payload: {
         isChoseConsumables: Number(id)
+      }
+    })
+  }
+
+export const changeConsumableInArray = (id: number | string, name: string, value: number) =>
+  (dispatch: Dispatch<DispatchEvent<ChangeConsumableInArrayDispatchInterface>>) => {
+    dispatch({
+      type: CHANGE_CONSUMABLE_IN_ARRAY,
+      payload: {
+        id: id,
+        name: name,
+        value: value
       }
     })
   }
