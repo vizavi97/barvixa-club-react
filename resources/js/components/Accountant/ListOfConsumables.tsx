@@ -2,7 +2,11 @@ import React, {DragEvent, useCallback, useRef} from 'react'
 import {Box, Table, Tbody, Th, Thead, Tr, Text, useToast, Tfoot, Button, Td} from "@chakra-ui/react";
 import {RootStateOrAny, useDispatch, useSelector} from "react-redux";
 import {AccountantStateInterface} from "../../store/interfaces/accountant";
-import {deleteAllChoseConsumables, putToChoseConsumables} from "../../store/actions/accountant.action";
+import {
+  deleteAllChoseConsumables,
+  putToChoseConsumables,
+  sendAllConsumable
+} from "../../store/actions/accountant.action";
 import {CalculationConsumableCell} from "./СalculationConsumableCell";
 
 export const ListOfConsumables: React.FC = () => {
@@ -32,7 +36,6 @@ export const ListOfConsumables: React.FC = () => {
     const id = event.dataTransfer.getData('id')
     tableRef.current?.classList.remove('draggable');
     const same = isChoseConsumables.length ? isChoseConsumables.some((item) => item.id === Number(id)) : false
-    console.log(same)
     if (same) {
       return toast({
         title: "Предупреждение",
@@ -45,7 +48,6 @@ export const ListOfConsumables: React.FC = () => {
     }
     return dispatch(putToChoseConsumables(id))
   }, [isChoseConsumables])
-
   return (
     <Box
       sx={{
@@ -122,7 +124,9 @@ export const ListOfConsumables: React.FC = () => {
             </Td>
             <Td width={"6rem"} px={0}>
               <Button colorScheme={"green"}
-                      type={"button"}>Внести</Button>
+                      type={"button"}
+                      onClick={() => dispatch(sendAllConsumable(isChoseConsumables))}
+              >Внести</Button>
             </Td>
           </Tr>
         </Tfoot>

@@ -10,7 +10,7 @@ interface CreateRequestInterface {
   changeCreateState: () => void;
 }
 
-export const CreateRequest: React.FC<CreateRequestInterface> = ({isCreate,changeCreateState}) => {
+export const CreateRequest: React.FC<CreateRequestInterface> = ({isCreate, changeCreateState}) => {
   const [info, setInfo] = useState<any>(null)
   const [state, setState] = useState<MainInterface>({
     hallId: null,
@@ -125,28 +125,23 @@ export const CreateRequest: React.FC<CreateRequestInterface> = ({isCreate,change
         {isCreate && info &&
         <Box pt={4}>
           <Flex flexDirection={"column"}>
-            <Text fontWeight={600}>Выберете зал</Text>
             <Grid
               templateColumns={{base: 'repeat(1, 1fr)', md: "repeat(2, 1fr)", lg: "repeat(3, 1fr)"}}
               gap={6}>
               {info.halls.map((item: any, key: number) =>
                 <GridItem
+                  d={"flex"}
+                  justifyContent={"center"}
+                  alignItems={"center"}
                   key={key}
-                  height={'240px'}
-                  onClick={() => changeStateHandler("hallId", item.id)}
                 >
-                  <Text textAlign={"center"}>{item.title}</Text>
-                  <Image src={item.preview_img.path}
-                         sx={{
-                           objectFit: 'cover',
-                           h: '100%',
-                           w: '100%',
-                           borderRadius: '.5rem',
-                           padding: '.5rem',
-                           border: item.id === state.hallId ? "3px solid rgba(122,122,122, 2)" : 0
-                         }}
-                         _hover={{boxShadow: '0 0 10px 3px rgba(122,122,122,.3)'}}
-                  />
+                  <Button
+                    width={'10rem'}
+                    height={'10rem'}
+                    onClick={() => changeStateHandler("hallId", item.id)}
+                  >
+                    <Text textAlign={"center"}>{item.title}</Text>
+                  </Button>
                 </GridItem>
               )}
             </Grid>
@@ -166,10 +161,12 @@ export const CreateRequest: React.FC<CreateRequestInterface> = ({isCreate,change
                   height={'60px'}
                   w={"60px"}
                   mx={4}
-                  background={"green.400"}
+                  cursor={item.is_busy === 1 ? "not-allowed" : "pointer"}
+                  background={item.is_busy === 1 ? "red.200" : "green.400"}
                   justifyContent={"center"}
                   alignItems={"center"}
-                  onClick={() => changeStateHandler("placeId", item.id)}
+                  isDisabled={item.is_busy === 1}
+                  onClick={item.is_busy === 1 ? () => {} : () => changeStateHandler("placeId", item.id)}
                 >
                   <Text>{item.number}</Text>
                 </Button>
@@ -197,12 +194,12 @@ export const CreateRequest: React.FC<CreateRequestInterface> = ({isCreate,change
                   marginBottom={4}
                   onClick={() => changeStateHandler("categoryId", item.id)}
                 >
-                  <Image src={item.preview_img.path}
-                         w={10}
-                         h={10}
-                         borderRadius={"50%"}
-                         marginRight={4}
-                  />
+                  {item.preview_img ? <Image src={item.preview_img.path}
+                                             w={10}
+                                             h={10}
+                                             borderRadius={"50%"}
+                                             marginRight={4}
+                  /> : null}
                   {item.title}
                 </Button>
               )}
@@ -222,30 +219,27 @@ export const CreateRequest: React.FC<CreateRequestInterface> = ({isCreate,change
                 <Flex flexDirection={"column"}
                       textAlign={"center"}
                       marginBottom={4}
-                      w={'180px'}
+                      w={'140px'}
                       overflow={"hidden"}
                       mx={4}
                       key={key}
                 >
                   <Button
-                    height={'60px'}
+                    d={"flex"}
+                    flexDirection={"column"}
                     background={"blue.300"}
                     marginBottom={2}
                     w={'100%'}
-                    h={'160px'}
-                    minHeight={'160px'}
+                    h={'120px'}
                     p={0}
                     onClick={() => addToBasketHandler(item)}
                   >
-                    <Image src={item.preview_img.path}
-                           objectFit={'cover'}
-                           height={'100%'}
-                           width={'100%'}
-                           borderRadius={4}
-                    />
+                    <Text as={'h6'} w={'calc(100% - .5rem)'} whiteSpace={"break-spaces"}>{item.title}</Text>
+                    <Text as={'h5'} fontWeight={600}
+                          w={'calc(100% - .5rem)'} whiteSpace={"break-spaces"}
+                          fontSize={"120%"}>{item.cost.toLocaleString()} сум</Text>
+
                   </Button>
-                  <Text as={'h6'}>{item.title} - <Text as={'strong'} fontWeight={600}
-                                                       fontSize={"120%"}>{item.cost.toLocaleString()} сум</Text></Text>
                 </Flex>
               )}
             </Flex>
@@ -253,28 +247,30 @@ export const CreateRequest: React.FC<CreateRequestInterface> = ({isCreate,change
         </Box>
         }
       </Flex>
-      {isCreate && <Block width={"400px"} minW={"400px"} p={4}>
+      {isCreate && <Block width={"400px"} minW={"400px"} minH={"calc(100vh - 2rem)"} p={4}>
         <Text textAlign={"center"} fontWeight={600} fontSize={'1.25rem'}>Заявка</Text>
-        {state.hallId && <Flex justifyContent={"space-between"}>
-          <Text>Зал:</Text>
-          <Box sx={{
-            flex: "1 0",
-            borderBottom: "1px dotted #000",
-            height: "1em",
-            margin: "0 .4em"
-          }}/>
-          <Text as={'h5'} fontWeight={600} fontSize={'1.25rem'}>{state.hallId}</Text>
-        </Flex>}
-        {state.placeId && <Flex justifyContent={"space-between"}>
-          <Text>Стол:</Text>
-          <Box sx={{
-            flex: "1 0",
-            borderBottom: "1px dotted #000",
-            height: "1em",
-            margin: "0 .4em"
-          }}/>
-          <Text as={'h5'} fontWeight={600} fontSize={'1.25rem'}>{state.placeId}</Text>
-        </Flex>}
+        {state.hallId && info.halls.map((item: any, key: number) => item.id === state.hallId ?
+          <Flex key={key} justifyContent={"space-between"}>
+            <Text>Зал:</Text>
+            <Box sx={{
+              flex: "1 0",
+              borderBottom: "1px dotted #000",
+              height: "1em",
+              margin: "0 .4em"
+            }}/>
+            <Text as={'h5'} fontWeight={600} fontSize={'1.25rem'}>{item.title}</Text>
+          </Flex> : null)}
+        {state.placeId && info.all_places.map((item: any, key: number) => item.id === state.placeId ?
+          <Flex key={key} justifyContent={"space-between"}>
+            <Text>Стол:</Text>
+            <Box sx={{
+              flex: "1 0",
+              borderBottom: "1px dotted #000",
+              height: "1em",
+              margin: "0 .4em"
+            }}/>
+            <Text as={'h5'} fontWeight={600} fontSize={'1.25rem'}>{item.number}</Text>
+          </Flex> : null)}
         <Text textAlign={"center"} fontWeight={600} fontSize={'1.25rem'}>Счет</Text>
         {state.request && state.request.map((item: RequestFoodInterface, key: number) => <Flex key={key}
                                                                                                flexDirection={"column"}>

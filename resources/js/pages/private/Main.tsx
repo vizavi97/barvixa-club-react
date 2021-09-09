@@ -8,39 +8,39 @@ import {logOutUser} from "../../store/actions/user.action";
 
 
 export const Main: React.FC = () => {
-  const [createRequest, setCreateRequest] = useState<boolean>(false)
+  const [createRequest, setCreateRequest] = useState<boolean>(true)
   const dispatch = useDispatch();
   return (
     <>
-      <Block flex={1}>
-        <Box py={4} px={8}>
-          <Flex justifyContent={"space-between"}>
-            <Button onClick={() => dispatch(logOutUser())}>Выйти</Button>
-            <Text as='h2' fontSize={'1.75rem'} fontWeight={700} textAlign={"left"}>
-              Заявки
-            </Text>
-            <Box>
-              {!createRequest &&
-              <Button variant={"outline"}
-                      colorScheme={"twitter"}
-                      onClick={() => setCreateRequest(() => true)}
-              >
-                оформить заявку
-              </Button>
+      {/*<Block flex={1}>*/}
+      {/*  <Box py={4} px={8}>*/}
+      {/*    <Flex justifyContent={"space-between"}>*/}
+      {/*      <Button onClick={() => dispatch(logOutUser())}>Выйти</Button>*/}
+      {/*      <Text as='h2' fontSize={'1.75rem'} fontWeight={700} textAlign={"left"}>*/}
+      {/*        Заявки*/}
+      {/*      </Text>*/}
+      {/*      <Box>*/}
+      {/*        {!createRequest &&*/}
+      {/*        <Button variant={"outline"}*/}
+      {/*                colorScheme={"twitter"}*/}
+      {/*                onClick={() => setCreateRequest(() => true)}*/}
+      {/*        >*/}
+      {/*          оформить заявку*/}
+      {/*        </Button>*/}
 
-              }
-              {createRequest &&
-              <Button variant={"outline"}
-                      colorScheme={"red"}
-                      onClick={() => setCreateRequest(() => false)}
-              >
-                Отменить заявку
-              </Button>
-              }
-            </Box>
-          </Flex>
-        </Box>
-      </Block>
+      {/*        }*/}
+      {/*        {createRequest &&*/}
+      {/*        <Button variant={"outline"}*/}
+      {/*                colorScheme={"red"}*/}
+      {/*                onClick={() => setCreateRequest(() => false)}*/}
+      {/*        >*/}
+      {/*          Отменить заявку*/}
+      {/*        </Button>*/}
+      {/*        }*/}
+      {/*      </Box>*/}
+      {/*    </Flex>*/}
+      {/*  </Box>*/}
+      {/*</Block>*/}
       <CreateRequest isCreate={createRequest}
                      changeCreateState={() => setCreateRequest(state => !state)}
       />

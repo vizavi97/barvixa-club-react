@@ -5,7 +5,7 @@ import {
   CHANGE_FILTERED_STRING, DELETE_All_CONSUMABLES_TO_CHOSE,
   DELETE_CONSUMABLES_TO_CHOSE,
   GET_CONSUMABLES,
-  PUT_CONSUMABLES_TO_CHOSE
+  PUT_CONSUMABLES_TO_CHOSE, SEND_ALL_CONSUMABLES
 } from "../types/accountant.types";
 
 const initialState = {
@@ -49,7 +49,9 @@ export const AccountantReducer = (state = initialState, action: DispatchEvent<an
         ...state,
         isChoseConsumables: state.isChoseConsumables.map(item => item.id === payload.id ? ({
           ...item,
-          [payload.name]: payload.value
+          count: +payload.form.count,
+          cost: +payload.form.cost,
+          amount: +payload.form.amount
         }) : item)
       }
     case DELETE_CONSUMABLES_TO_CHOSE:
@@ -61,6 +63,11 @@ export const AccountantReducer = (state = initialState, action: DispatchEvent<an
       return {
         ...state,
         isChoseConsumables: payload.isChoseConsumables
+      }
+    case SEND_ALL_CONSUMABLES:
+      return {
+        ...state,
+        isChoseConsumables: []
       }
     default:
       return state

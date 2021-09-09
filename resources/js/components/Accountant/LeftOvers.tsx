@@ -37,24 +37,24 @@ export const LeftOvers: React.FC<LeftOversInterface> = () => {
             <Th width={"4rem"} isNumeric>Цена по <br/> накладдной</Th>
           </Tr>
         </Thead>
-        <Tbody sx={{
-          display: "block",
-          overflow: "auto",
-          height: "calc(100vh - 200px)",
-          width: "100%"
-        }}>
-          {(!isLoading && consumables.length)
-            ? consumables.map((item, key) =>
-              <ConsumableCell
-                id={item.id}
-                name={item.title}
-                type={item.type}
-                cost={item.price}
-                group={item.group}
-                key={key}/>)
-            : <TableLoader length={20}/>}
+        {/*<Tbody sx={{*/}
+        {/*  display: "block",*/}
+        {/*  overflow: "auto",*/}
+        {/*  height: "calc(100vh - 200px)",*/}
+        {/*  width: "100%"*/}
+        {/*}}>*/}
+        {/*  {(!isLoading && consumables.length)*/}
+        {/*    ? consumables.map((item, key) =>*/}
+        {/*      <ConsumableCell*/}
+        {/*        id={item.id}*/}
+        {/*        name={item.title}*/}
+        {/*        type={item.type}*/}
+        {/*        cost={item.price}*/}
+        {/*        group={item.group}*/}
+        {/*        key={key}/>)*/}
+        {/*    : <TableLoader length={20}/>}*/}
 
-        </Tbody>
+        {/*</Tbody>*/}
 
       </Table>
     </Block>

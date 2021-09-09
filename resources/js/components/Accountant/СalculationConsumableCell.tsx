@@ -12,11 +12,12 @@ interface CalculationConsumableCellInterface {
   amount: number
 }
 
-interface formStateInterface {
+export interface FormStateInterface {
   count: number
   cost: number
   amount: number
 }
+
 
 export const CalculationConsumableCell: React.FC<CalculationConsumableCellInterface> = ({
                                                                                           id,
@@ -27,10 +28,23 @@ export const CalculationConsumableCell: React.FC<CalculationConsumableCellInterf
                                                                                           amount
                                                                                         }) => {
   const dispatch = useDispatch()
+  const [form,setForm] = useState<FormStateInterface>({
+    count,
+    cost,
+    amount,
+  })
   const changeInputHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const {name, value} = event.target
-    dispatch(changeConsumableInArray(id,name,+value))
+    setForm(state => ({
+      ...state,
+      [name]: value
+    }))
   }
+
+  const blurOutHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    dispatch(changeConsumableInArray(id,form))
+  }
+
 
 
   return (
@@ -43,8 +57,9 @@ export const CalculationConsumableCell: React.FC<CalculationConsumableCellInterf
         <Td width={"6rem"}>
           <Input type={'number'}
                  name={'count'}
-                 value={count}
+                 value={form.count}
                  onChange={changeInputHandler}
+                 onBlur={blurOutHandler}
                  px={1}
                  min={0}
           />
@@ -52,8 +67,9 @@ export const CalculationConsumableCell: React.FC<CalculationConsumableCellInterf
         <Td width={"6rem"}>
           <Input type={'number'}
                  name={'cost'}
-                 value={cost}
+                 value={form.cost}
                  onChange={changeInputHandler}
+                 onBlur={blurOutHandler}
                  px={1}
                  min={0}
           />
@@ -61,8 +77,9 @@ export const CalculationConsumableCell: React.FC<CalculationConsumableCellInterf
         <Td width={"6rem"}>
           <Input type={'number'}
                  name={'amount'}
-                 value={amount}
+                 value={form.amount}
                  onChange={changeInputHandler}
+                 onBlur={blurOutHandler}
                  px={1}
                  min={0}
           />

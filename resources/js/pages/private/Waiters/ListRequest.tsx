@@ -29,6 +29,7 @@ export const ListRequest: React.FC<ListRequestInterface> = ({isCreate}) => {
         console.log(":LIST error:", error)
       })
   }, [isCreate]);
+  console.log(data)
 
   if (isCreate) return null
   return (
@@ -41,13 +42,15 @@ export const ListRequest: React.FC<ListRequestInterface> = ({isCreate}) => {
           color="blue.500"
           size="xl"
         /></Flex>}
-      {!isLoad && data.length > 0 && data.map((item, key) =>
+      {!isLoad && data.length > 0 && data.map((item:any, key) =>
         <RequestItem
           key={key}
           id={item.id}
           amount={item.amount}
           products={item.products}
           status={item.status.title as string}
+          hall={item.hall.title as string}
+          place={item.place.number}
           created_at={item.created_at}
         />)}
     </Block>

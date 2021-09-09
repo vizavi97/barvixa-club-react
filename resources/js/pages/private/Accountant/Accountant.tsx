@@ -31,7 +31,7 @@ export const Accountant: React.FC<AccountantInterface> = () => {
         </Flex>
         <Flex flex={1} ml={2}>
           <Divider mx={1} orientation="vertical"/>
-          <LeftOvers/>
+          {/*<LeftOvers/>*/}
         </Flex>
       </Flex>
     </Block>

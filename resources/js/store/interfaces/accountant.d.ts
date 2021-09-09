@@ -1,3 +1,5 @@
+import {FormStateInterface} from "../../components/Accountant/СalculationConsumableCell";
+
 export interface AccountantStateInterface {
   consumables: [] | ConsumablesInterface[]
   isLoading: boolean
@@ -31,6 +33,5 @@ export interface ChangeFilteredStringDispatchInterface {
 
 export interface ChangeConsumableInArrayDispatchInterface {
   id: number | string,
-  name: string,
-  value: number
+  form: FormStateInterface
 }

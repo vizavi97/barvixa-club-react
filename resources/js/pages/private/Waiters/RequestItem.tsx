@@ -16,6 +16,7 @@ import {
   Divider,
   Badge
 } from "@chakra-ui/react";
+import {RootStateOrAny, useSelector} from "react-redux";
 
 export interface RequestItemInterface {
   id: number
@@ -23,6 +24,8 @@ export interface RequestItemInterface {
   products: any[] | []
   status: any | string
   created_at: string | Date
+  hall: string
+  place: number
 }
 
 export const RequestItem: React.FC<RequestItemInterface> = ({
@@ -30,9 +33,12 @@ export const RequestItem: React.FC<RequestItemInterface> = ({
                                                               amount,
                                                               products,
                                                               status,
-                                                              created_at
+                                                              created_at,
+  hall,
+  place
                                                             }) => {
-
+  const {user} = useSelector((state:RootStateOrAny) => state.user)
+  console.log("User", user);
   const [isOpen, setIsOpen] = useState<boolean>(false)
   return (
     <Block p={6} mb={6} borderRadius={2}
@@ -50,13 +56,22 @@ export const RequestItem: React.FC<RequestItemInterface> = ({
       >
         <Box>
           <Text fontSize="1.25rem" color="twitter">
-            Id заказа: <Text as={'span'} color={"red"} fontWeight={"600"}>{id}</Text>
+            № счета: <Text as={'span'} color={"red"} fontWeight={"600"}>{id}</Text>
+          </Text>
+          <Text fontSize="1.25rem" color="twitter">
+            Исполнитель: <Text as={'span'} color={"red"} fontWeight={"600"}>{id}</Text>
           </Text>
           <Text fontSize="1.25rem" color="twitter">
             Цена заказа: <Text as={'span'} color={"green"} fontWeight={"600"}> {amount}</Text>
           </Text>
           <Text fontSize="1.25rem" color="twitter">
             Время создания заказа: <Text as={'span'} color={"orange"} fontWeight={"600"}> {created_at}</Text>
+          </Text>
+          <Text fontSize="1.25rem" color="twitter">
+            Зал: <Text as={'span'} color={"orange"} fontWeight={"600"}> {hall}</Text>
+          </Text>
+          <Text fontSize="1.25rem" color="twitter">
+            Место: <Text as={'span'} color={"orange"} fontWeight={"600"}> {place}</Text>
           </Text>
           <Text fontWeight={"600"}>Статус:
             <Badge ml={4} fontSize="0.8em" colorScheme="green">
