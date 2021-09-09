@@ -7,7 +7,7 @@ import {useDispatch} from "react-redux";
 import {logOutUser} from "../../store/actions/user.action";
 
 
-export const Main: React.FC = () => {
+export const Waiter: React.FC = () => {
   const [createRequest, setCreateRequest] = useState<boolean>(true)
   const dispatch = useDispatch();
   return (

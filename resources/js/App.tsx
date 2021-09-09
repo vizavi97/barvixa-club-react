@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {BrowserRouter, Route, Switch} from 'react-router-dom'
 import {Login} from "./pages/auth/Login";
-import {Main} from "./pages/private/Main";
+import {Waiter} from "./pages/private/Main";
 import {PreLoader} from "./components/PreLoader";
 import {meQuery} from "./store/actions/user.action";
 import {RootStateOrAny, useDispatch, useSelector} from "react-redux";
@@ -39,7 +39,7 @@ function App() {
       <BrowserRouter>
         <WaiterLayout>
           <Switch>
-            <Route exact path='/' component={Main}/>
+            <Route exact path='/' component={Waiter}/>
           </Switch>
         </WaiterLayout>
       </BrowserRouter>

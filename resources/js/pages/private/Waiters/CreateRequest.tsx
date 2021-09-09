@@ -1,6 +1,6 @@
 import React, {useEffect, useMemo, useState} from 'react'
 import {MainInterface, RequestFoodInterface, sameProductCheckedInterface} from "../../../intefaces/request";
-import axios from "axios";
+import axios from "../../../config/axios.config";
 import {BACKEND_API_URL} from "../../../config/app.config";
 import {Box, Button, Flex, Grid, GridItem, Image, Link, Text} from "@chakra-ui/react";
 import {Block} from "../../../config/ui/Block";
@@ -19,6 +19,7 @@ export const CreateRequest: React.FC<CreateRequestInterface> = ({isCreate, chang
     request: [],
     amount: 0
   });
+  const [isUpdate, setUpdate] = useState<boolean>(false)
   useEffect(() => {
     axios.get(`${BACKEND_API_URL}info`)
       .then(resp => setInfo(() => resp.data))
@@ -119,6 +120,10 @@ export const CreateRequest: React.FC<CreateRequestInterface> = ({isCreate, chang
       })
       .catch(err => console.log('request error :', err))
   }
+  const updateHandler = (place: number) => {
+    setUpdate(() => true)
+    console.log(place)
+  }
   return (
     <Flex>
       <Flex flex={1} flexDirection={"column"}>
@@ -155,8 +160,23 @@ export const CreateRequest: React.FC<CreateRequestInterface> = ({isCreate, chang
               flexWrap={"wrap"}
               pt={4}
             >
-              {info.places[state.hallId].map((item: any, key: number) =>
-                <Button
+              {info.places[state.hallId].map((item: any, key: number) => {
+                if (info.records.some((recordsItem: any) => item.id === recordsItem.place_id)) {
+                  return <Button
+                    key={key}
+                    height={'60px'}
+                    w={"60px"}
+                    mx={4}
+                    background={"orange.500"}
+                    justifyContent={"center"}
+                    alignItems={"center"}
+                    onClick={() => updateHandler(item.id)}
+                  >
+                    <Text>{item.number}</Text>
+                  </Button>
+                }
+
+                return <Button
                   key={key}
                   height={'60px'}
                   w={"60px"}
@@ -166,11 +186,12 @@ export const CreateRequest: React.FC<CreateRequestInterface> = ({isCreate, chang
                   justifyContent={"center"}
                   alignItems={"center"}
                   isDisabled={item.is_busy === 1}
-                  onClick={item.is_busy === 1 ? () => {} : () => changeStateHandler("placeId", item.id)}
+                  onClick={item.is_busy === 1 ? () => {
+                  } : () => changeStateHandler("placeId", item.id)}
                 >
                   <Text>{item.number}</Text>
                 </Button>
-              )}
+              })}
             </Flex>
           </Flex>
         </Box>
@@ -247,7 +268,7 @@ export const CreateRequest: React.FC<CreateRequestInterface> = ({isCreate, chang
         </Box>
         }
       </Flex>
-      {isCreate && <Block width={"400px"} minW={"400px"} minH={"calc(100vh - 2rem)"} p={4}>
+      {!isUpdate && isCreate && <Block width={"400px"} minW={"400px"} minH={"calc(100vh - 2rem)"} p={4}>
         <Text textAlign={"center"} fontWeight={600} fontSize={'1.25rem'}>Заявка</Text>
         {state.hallId && info.halls.map((item: any, key: number) => item.id === state.hallId ?
           <Flex key={key} justifyContent={"space-between"}>
@@ -321,6 +342,11 @@ export const CreateRequest: React.FC<CreateRequestInterface> = ({isCreate, chang
         </Flex>
         }
       </Block>}
+      {isUpdate && <Block width={"400px"} minW={"400px"} minH={"calc(100vh - 2rem)"} p={4}>
+        <Text textAlign={"center"} fontWeight={600} fontSize={'1.25rem'}>Изменение заказа</Text>
+      </Block>
+      }
+
     </Flex>
   )
 }

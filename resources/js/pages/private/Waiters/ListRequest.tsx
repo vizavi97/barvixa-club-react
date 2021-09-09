@@ -14,7 +14,6 @@ export const ListRequest: React.FC<ListRequestInterface> = ({isCreate}) => {
   const [isLoad, setIsLoad] = useState<boolean>(false)
   useEffect(() => {
     setIsLoad(() => true)
-
     axios.get(`${BACKEND_API_URL}request`, {
       headers: {
         "Authorization": `${localStorage.getItem('token')}`
@@ -29,8 +28,6 @@ export const ListRequest: React.FC<ListRequestInterface> = ({isCreate}) => {
         console.log(":LIST error:", error)
       })
   }, [isCreate]);
-  console.log(data)
-
   if (isCreate) return null
   return (
     <Block mt={4}>
